@@ -1,0 +1,23 @@
+@(ratings: Seq[(String, Int)])
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Title</title>
+    </head>
+
+    <body>
+        <table>
+            <tr>
+                <th>Rating</th>
+                <th>Percentage</th>
+            </tr>
+            @for(r <- ratings) {
+                <tr>
+                <td>@{r._1}</td>
+                <td>@{r._2}</td>
+            </tr>
+            }
+        </table>
+    </body>
+</html>
+
