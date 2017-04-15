@@ -37,7 +37,7 @@ enablePlugins(JavaAppPackaging)
 enablePlugins(SbtTwirl)
 
 // Code coverage alias
-addCommandAlias("validate", ";coverage;test;coverageReport")git st
+addCommandAlias("validate", ";coverage;test;coverageReport")
 
 coverageMinimum := 75
 coverageFailOnMinimum := true

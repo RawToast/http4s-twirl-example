@@ -1,20 +1,25 @@
 package hygiene.services
 
-import org.http4s.HttpService
+import hygiene.client.HygieneClient
+import io.circe.Json
 import org.http4s.dsl._
-import org.http4s.twirl._
+import org.http4s.{HttpService, Uri}
 import play.twirl.api.Html
+import org.http4s.twirl._
 
-class AuthorityController {
-
-  val authorityService: HttpService = HttpService {
+class AuthorityController(client: HygieneClient[Json], establishmentParser: EstablishmentParser[Json], formatter: Formatter) {
+  val endpoints: HttpService = HttpService {
     case GET -> Root / "authority" / IntVar(id) =>
 
-      val ratings = Seq("5-star" -> 50, "4-star" -> 0,
-        "3-star" -> 0, "2-star" -> 0, "1-star" -> 25, "Exempt" -> 25)
-      val h: Html = hygiene.html.authority(ratings)
+      // For now, assume cannot be more than 999
+      val uri = Uri.unsafeFromString(s"http://api.ratings.food.gov.uk/Establishments?localAuthorityId=${id}&pageSize=999")
 
-      Ok(h)
+      client.fetch(uri)
+        .map(establishmentParser.countEstablishmentRatings)
+        .map(formatter.summariseRatings)
+        .map(toHtml)
+        .flatMap(Ok(_))
   }
 
+  private def toHtml(kv: Map[String, Double]): Html = hygiene.html.authority(kv)
 }

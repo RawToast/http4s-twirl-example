@@ -1,4 +1,4 @@
-@(ratings: Seq[(String, Int)])
+@(ratings: Map[String, Double])
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
@@ -11,10 +11,10 @@
                 <th>Rating</th>
                 <th>Percentage</th>
             </tr>
-            @for(r <- ratings) {
+            @for((k, v) <- ratings) {
                 <tr>
-                <td>@{r._1}</td>
-                <td>@{r._2}</td>
+                <td>@{k}</td>
+                <td>@{v}</td>
             </tr>
             }
         </table>
