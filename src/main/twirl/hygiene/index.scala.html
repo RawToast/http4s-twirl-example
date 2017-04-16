@@ -5,26 +5,29 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Hygiene Ratings</title>
-        <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
 
     <body>
         <div class="container">
-            <span class="col-md-6">
+            <h1 class="lead"> Hygiene Ratings</h1>
 
+            <div class="row">
+            <div class="col-md-6">
                 @if(ratings.isEmpty) {
                     <div class="alert alert-danger" role="alert">No authorities found!</div>
                 } else {
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="authorityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Authorities
+                        <button class="btn btn-default dropdown-toggle" type="button" id="authorityDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
+                            Select an Authority
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="authorityDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="authorityDropdown" style="width: 100%">
                         @for(authority <- ratings) {
-                            <li><a href=@{
+                            <li class="authchoice"><a name=@{s"${authority.name}"} uri=@{
                                 s"/authority/${authority.id}?authSize=${authority.establishments}"
                             }>@{
                                 authority.name
@@ -33,7 +36,37 @@
                         </ul>
                     </div>
                 }
-            </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 id="authorityTitle"></h3>
+                    <div id="result"></div>
+                </div>
+            </div>
         </div>
+
+        <script type="text/javascript">
+            $(document).ready(
+                $(".authchoice a").click(function(evt) {
+
+                    evt.preventDefault();
+
+                    var uri = $(this).attr("uri");
+                    var name = $(this).html();
+
+                    jQuery("#authorityTitle").html("");
+                    jQuery( "#result" ).html( "..." );
+
+                    jQuery.get(uri, function(data){
+                        jQuery("#authorityTitle").html(name);
+                        jQuery( "#result" ).html( data );
+                    });
+
+                })
+            );
+        </script>
+
     </body>
 </html>

@@ -29,7 +29,7 @@ class IndexViewSpec extends WordSpec with MockitoSugar {
       }
     }
 
-    "rendering with  authorities" must {
+    "rendering with authorities" must {
 
       val renderedHtml = hygiene.html.index(Seq(Authority("test", 1, 9999), Authority("test alt", 2, 9999)))
 
@@ -45,8 +45,8 @@ class IndexViewSpec extends WordSpec with MockitoSugar {
       }
 
       "include rows for each authority in the dropdown" in {
-        assert(page.contains("<li><a href=/authority/1?authSize=9999>test</a></li>"))
-        assert(page.contains("<li><a href=/authority/2?authSize=9999>test alt</a></li>"))
+        assert(page.contains("uri=/authority/1?authSize=9999"))
+        assert(page.contains("uri=/authority/2?authSize=9999"))
       }
     }
   }

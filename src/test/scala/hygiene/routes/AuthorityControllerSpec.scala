@@ -1,29 +1,32 @@
-package hygiene
+package hygiene.routes
 
 import fs2.Task
+import hygiene.Responses.{multiAuthorityResponse, scottishEstablishmentsJson, validEstablishmentsJson}
 import hygiene.client.JsonClient
-import hygiene.services.{AuthorityController, JsonAuthorityParser, JsonEstablishmentParser, RatingsFormatter}
+import hygiene.services._
 import io.circe.literal._
 import org.http4s.dsl._
 import org.http4s.{MaybeResponse, Request, Response, Uri, _}
 import org.mockito.Mockito._
 import org.scalatest.WordSpec
 import org.scalatest.mockito.MockitoSugar
-import hygiene.Responses.multiAuthorityResponse
-
 
 class AuthorityControllerSpec extends WordSpec with MockitoSugar {
 
   "AuthorityController" when {
 
     val mockClient = mock[JsonClient]
-    val authorityController = new AuthorityController(mockClient, JsonEstablishmentParser, RatingsFormatter, JsonAuthorityParser)
+
+    def authorityService = new AuthorityService(mockClient, JsonAuthorityParser, cacheTimeInSeconds = 0L)
+    val establishmentService = new EstablishmentService(mockClient, JsonEstablishmentParser, RatingsFormatter, cacheTimeInSeconds = 0L)
+    val authorityController = new AuthorityController(establishmentService, authorityService)
+
 
     val authEndpoints = authorityController.endpoints
     val request = Request(GET, Uri.uri("/authority/1"))
 
     "a local authority with no ratings selected" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
+      when(mockClient.fetch("/Establishments?localAuthorityId=1&pageSize=100"))
         .thenReturn(Task.now(json"""{}"""))
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
@@ -58,8 +61,9 @@ class AuthorityControllerSpec extends WordSpec with MockitoSugar {
     }
 
     "a local authority with ratings is selected" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
-        .thenReturn(Task.delay(Responses.validEstablishmentsJson))
+      when(mockClient.fetch("/Establishments?localAuthorityId=1&pageSize=100"))
+        .thenReturn(Task.delay(validEstablishmentsJson))
+
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
 
@@ -91,8 +95,9 @@ class AuthorityControllerSpec extends WordSpec with MockitoSugar {
     }
 
     "a scottish authority with ratings is selected" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
-        .thenReturn(Task.delay(Responses.scottishEstablishmentsJson))
+      when(mockClient.fetch("/Establishments?localAuthorityId=1&pageSize=100"))
+        .thenReturn(Task.delay(scottishEstablishmentsJson))
+
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
 
@@ -129,7 +134,7 @@ class AuthorityControllerSpec extends WordSpec with MockitoSugar {
 
 
     "fetching the index page" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/authorities/basic")))
+      when(mockClient.fetch("/authorities/basic"))
         .thenReturn(Task.now(multiAuthorityResponse))
       val request = Request(GET, Uri.uri("/"))
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))

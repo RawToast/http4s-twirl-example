@@ -17,7 +17,8 @@ class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfte
   server.start()
   WireMock.configureFor(testport)
 
-  val uri = Uri.unsafeFromString(s"http://localhost:$testport/json")
+  val baseUri = Uri.unsafeFromString(s"http://localhost:$testport")
+  val endpoint = "/json"
 
   override def afterEach(): Unit = {
     server.resetAll()
@@ -29,14 +30,14 @@ class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfte
 
   "JsonClient" when {
 
-    val client: JsonClient = new JsonClient(PooledHttp1Client())
+    val client: JsonClient = new JsonClient(PooledHttp1Client(), baseUri)
 
     "the resource returns a successful valid JSON response" must {
 
-      stubFor(get("/json").withHeader("x-api-version", equalTo("2"))
+      stubFor(get(endpoint).withHeader("x-api-version", equalTo("2"))
         .willReturn(okJson("""{ "hello" : "world" }""")))
 
-      val resultEither: Either[Throwable, Json] = client.fetch(uri).unsafeAttemptRun()
+      val resultEither: Either[Throwable, Json] = client.fetch(endpoint).unsafeAttemptRun()
 
       "return successfully" in {
         assert(resultEither.isRight)
@@ -52,12 +53,12 @@ class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfte
 
     "the resource returns failure, but with a valid JSON response" must {
 
-      stubFor(get("/json").withHeader("x-api-version", equalTo("2"))
+      stubFor(get(endpoint).withHeader("x-api-version", equalTo("2"))
         .willReturn(aResponse().withStatus(400)
           .withHeader("content-type", "application/json")
           .withBody("""{ "Message": "The request is invalid." }""")))
 
-      val json: Task[Json] = client.fetch(uri)
+      val json: Task[Json] = client.fetch(endpoint)
 
       val resultEither: Either[Throwable, Json] = json.unsafeAttemptRun()
 
@@ -78,12 +79,12 @@ class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfte
 
       // This is based on a call to, <http://api.ratings.food.gov.uk/auth>
       // The service interestingly returns a content type of json, but the data is not json
-      stubFor(get("/json").withHeader("x-api-version", equalTo("2"))
+      stubFor(get(endpoint).withHeader("x-api-version", equalTo("2"))
         .willReturn(aResponse().withStatus(404)
           .withHeader("content-type", "application/json")
           .withBody("The API 'Version2.auth' doesn't exist")))
 
-      val resultEither: Either[Throwable, Json] = client.fetch(uri).unsafeAttemptRun()
+      val resultEither: Either[Throwable, Json] = client.fetch(endpoint).unsafeAttemptRun()
 
       "returns an error in the either" in {
         assert(resultEither.isLeft)
