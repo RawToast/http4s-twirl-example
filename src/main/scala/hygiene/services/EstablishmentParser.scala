@@ -10,8 +10,6 @@ trait EstablishmentParser[T] {
 
 object JsonEstablishmentParser extends EstablishmentParser[Json] {
 
-  //private val emptyRatings = Map((5, 0), (4, 0), (3, 0), (2, 0), (1, 0), (0, 0))
-
   import io.circe.optics.JsonPath._
 
   def establishmentRating(singleEstablishment: Json): Option[String] =

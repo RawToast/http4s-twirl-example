@@ -2,22 +2,44 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
-        <title>Title</title>
+        <title>Hygiene Ratings</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
 
     <body>
-        <table>
-            <tr>
-                <th>Rating</th>
-                <th>Percentage</th>
-            </tr>
-            @for((k, v) <- ratings) {
-                <tr>
-                <td>@{k}</td>
-                <td>@{v}</td>
-            </tr>
-            }
-        </table>
+        <div class="container">
+            <span class="col-md-6">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Rating</th>
+                        <th>Percentage</th>
+                    </tr>
+                    @tableRow(rating: String) = @{
+                        ratings.get(rating).map(f => {
+                                <tr>
+                                <td>{rating}</td>
+                                <td>{f.toString.take(4)}</td>
+                                </tr>
+                        })
+                    }
+
+                    @for(score <- Seq("5-star", "4-star", "3-star", "2-star", "1-star", "0-star")) {
+                        @tableRow(score)
+                    }
+
+                    @for(score <- Seq("Pass", "Improvement Required")) {
+                        @tableRow(score)
+                    }
+
+                    @tableRow("Exempt")
+
+                    @for(remaining <- ratings.keySet.-("5-star", "4-star", "3-star", "2-star", "1-star", "0-star", "Pass", "Improvement Required", "Exempt")){
+                        @tableRow(remaining)
+                    }
+
+                </table>
+            </span>
+        </div>
     </body>
 </html>
 

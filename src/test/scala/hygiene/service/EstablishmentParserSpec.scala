@@ -40,8 +40,9 @@ class EstablishmentParserSpec extends WordSpec {
         val scores: Map[String, Int] = JsonEstablishmentParser.countEstablishmentRatings(scottishEstablishmentsJson)
 
         assert(scores.nonEmpty)
-        assert(scores.size == 1)
-        assert(scores.head == ("Pass" -> 3))
+        assert(scores.size == 5)
+        assert(scores == Map("Awaiting Publication" -> 1, "Improvement Required" -> 1,
+          "Exempt" -> 1, "Awaiting Inspection" -> 1, "Pass" -> 1))
       }
 
       "return an empty summary for JSON with a different structure" in {

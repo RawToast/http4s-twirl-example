@@ -22,7 +22,7 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
     val request = Request(GET, Uri.uri("/authority/1"))
 
     "a local authority with no ratings selected" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=999")))
+      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
         .thenReturn(Task.now(json"""{}"""))
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
@@ -55,7 +55,7 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
     }
 
     "a local authority with ratings is selected" must {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=999")))
+      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
         .thenReturn(Task.delay(Responses.validEstablishmentsJson))
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
@@ -87,8 +87,8 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
       }
     }
 
-    "a scottish authority with ratings is selected" ignore {
-      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=999")))
+    "a scottish authority with ratings is selected" must {
+      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/Establishments?localAuthorityId=1&pageSize=9999")))
         .thenReturn(Task.delay(Responses.scottishEstablishmentsJson))
 
       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
@@ -114,11 +114,13 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
 
         // Scottish ratings
         assert(page.contains("<td>Pass</td>"))
-        assert(page.contains("<td>Needs Improvement</td>"))
+        assert(page.contains("<td>Awaiting Publication</td>"))
+        assert(page.contains("<td>Awaiting Inspection</td>"))
+        assert(page.contains("<td>Improvement Required</td>"))
+        assert(page.contains("<td>Exempt</td>"))
 
         // No star based ratings
         assert(!page.contains("-star</td>"))
-        assert(!page.contains("<td>Exempt</td>"))
       }
     }
 

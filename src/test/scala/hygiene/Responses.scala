@@ -212,8 +212,8 @@ object Responses {
       "AddressLine4": "",
       "PostCode": "AB11 5PQ",
       "Phone": "",
-      "RatingValue": "Pass",
-      "RatingKey": "fhis_pass_en-gb",
+      "RatingValue": "Awaiting Inspection",
+      "RatingKey": "fhis_awaiting_inspection_en-gb",
       "RatingDate": "2015-10-12T00:00:00",
       "LocalAuthorityCode": "760",
       "LocalAuthorityName": "Aberdeen City",
@@ -256,8 +256,8 @@ object Responses {
       "AddressLine4": "",
       "PostCode": "AB10 1UB",
       "Phone": "",
-      "RatingValue": "Pass",
-      "RatingKey": "fhis_pass_en-gb",
+      "RatingValue": "Improvement Required",
+      "RatingKey": "fhis_improvement_required_en-gb",
       "RatingDate": "2014-03-11T00:00:00",
       "LocalAuthorityCode": "760",
       "LocalAuthorityName": "Aberdeen City",
@@ -287,6 +287,94 @@ object Responses {
         "pageNumber": 0
       },
       "links": []
+    },
+    {
+      "FHRSID": 593038,
+      "LocalAuthorityBusinessID": "EHDC4775",
+      "BusinessName": "22 CLUB",
+      "BusinessType": "Pub/bar/nightclub",
+      "BusinessTypeID": 7843,
+      "AddressLine1": "",
+      "AddressLine2": "55 Rose Street",
+      "AddressLine3": "Aberdeen",
+      "AddressLine4": "",
+      "PostCode": "AB10 1UB",
+      "Phone": "",
+      "RatingValue": "Awaiting Publication",
+      "RatingKey": "fhis_awaiting_publication_en-gb",
+      "RatingDate": "2014-03-11T00:00:00",
+      "LocalAuthorityCode": "760",
+      "LocalAuthorityName": "Aberdeen City",
+      "LocalAuthorityWebSite": "http://www.aberdeencity.gov.uk",
+      "LocalAuthorityEmailAddress": "commercial@aberdeencity.gov.uk",
+      "scores": {
+        "Hygiene": null,
+        "Structural": null,
+        "ConfidenceInManagement": null
+      },
+      "SchemeType": "FHIS",
+      "geocode": {
+        "longitude": "-2.111912",
+        "latitude": "57.144562"
+      },
+      "RightToReply": "",
+      "Distance": null,
+      "NewRatingPending": false,
+      "meta": {
+        "dataSource": null,
+        "extractDate": "0001-01-01T00:00:00",
+        "itemCount": 0,
+        "returncode": null,
+        "totalCount": 0,
+        "totalPages": 0,
+        "pageSize": 0,
+        "pageNumber": 0
+      },
+      "links": []
+    },
+    {
+      "FHRSID": 593689,
+      "LocalAuthorityBusinessID": "EHDC9793",
+      "BusinessName": "210 BISTRO",
+      "BusinessType": "Restaurant/Cafe/Canteen",
+      "BusinessTypeID": 1,
+      "AddressLine1": "",
+      "AddressLine2": "210 Market Street",
+      "AddressLine3": "Aberdeen",
+      "AddressLine4": "",
+      "PostCode": "AB11 5PQ",
+      "Phone": "",
+      "RatingValue": "Exempt",
+      "RatingKey": "fhis_exempt_en-gb",
+      "RatingDate": "2015-10-12T00:00:00",
+      "LocalAuthorityCode": "760",
+      "LocalAuthorityName": "Aberdeen City",
+      "LocalAuthorityWebSite": "http://www.aberdeencity.gov.uk",
+      "LocalAuthorityEmailAddress": "commercial@aberdeencity.gov.uk",
+      "scores": {
+        "Hygiene": null,
+        "Structural": null,
+        "ConfidenceInManagement": null
+      },
+      "SchemeType": "FHIS",
+      "geocode": {
+        "longitude": "-2.092258",
+        "latitude": "57.142278"
+      },
+      "RightToReply": "",
+      "Distance": null,
+      "NewRatingPending": false,
+      "meta": {
+        "dataSource": null,
+        "extractDate": "0001-01-01T00:00:00",
+        "itemCount": 0,
+        "returncode": null,
+        "totalCount": 0,
+        "totalPages": 0,
+        "pageSize": 0,
+        "pageNumber": 0
+      },
+      "links": []
     }
   ],
   "meta": {
@@ -296,7 +384,7 @@ object Responses {
     "returncode": "OK",
     "totalCount": 1761,
     "totalPages": 587,
-    "pageSize": 3,
+    "pageSize": 4,
     "pageNumber": 1
   },
   "links": []
