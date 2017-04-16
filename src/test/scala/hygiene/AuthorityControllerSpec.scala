@@ -2,21 +2,22 @@ package hygiene
 
 import fs2.Task
 import hygiene.client.JsonClient
-import hygiene.services.{AuthorityController, JsonEstablishmentParser, RatingsFormatter}
+import hygiene.services.{AuthorityController, JsonAuthorityParser, JsonEstablishmentParser, RatingsFormatter}
 import io.circe.literal._
 import org.http4s.dsl._
 import org.http4s.{MaybeResponse, Request, Response, Uri, _}
 import org.mockito.Mockito._
 import org.scalatest.WordSpec
 import org.scalatest.mockito.MockitoSugar
+import hygiene.Responses.multiAuthorityResponse
 
 
-class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
+class AuthorityControllerSpec extends WordSpec with MockitoSugar {
 
   "AuthorityController" when {
 
     val mockClient = mock[JsonClient]
-    val authorityController = new AuthorityController(mockClient, JsonEstablishmentParser, RatingsFormatter)
+    val authorityController = new AuthorityController(mockClient, JsonEstablishmentParser, RatingsFormatter, JsonAuthorityParser)
 
     val authEndpoints = authorityController.endpoints
     val request = Request(GET, Uri.uri("/authority/1"))
@@ -36,21 +37,23 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
         assert(maybeResponse.headers.get("content-type".ci).contains(Header("Content-Type", "text/html; charset=UTF-8")))
       }
 
-      "include a tabular breakdown for the authority" in {
+      "not include a tabular breakdown for the authority" in {
 
         val pageTask: Task[String] = maybeResponse.as[String]
         val page = pageTask.unsafeRun()
 
-        assert(page.contains("<table"))
+        assert(!page.contains("<table"))
         //Rating Percentage
-        assert(page.contains("<th>Rating</th>"))
-        assert(page.contains("<th>Percentage</th>"))
+        assert(!page.contains("<th>Rating</th>"))
+        assert(!page.contains("<th>Percentage</th>"))
         assert(!page.contains("<td>5-star</td>"))
         assert(!page.contains("<td>4-star</td>"))
         assert(!page.contains("<td>3-star</td>"))
         assert(!page.contains("<td>2-star</td>"))
         assert(!page.contains("<td>1-star</td>"))
         assert(!page.contains("<td>Exempt</td>"))
+
+        assert(page.contains("No establishments found"))
       }
     }
 
@@ -124,6 +127,17 @@ class AuthorityHygieneSpec extends WordSpec with MockitoSugar {
       }
     }
 
+
+    "fetching the index page" must {
+      when(mockClient.fetch(Uri.uri("http://api.ratings.food.gov.uk/authorities/basic")))
+        .thenReturn(Task.now(multiAuthorityResponse))
+      val request = Request(GET, Uri.uri("/"))
+      val maybeResponse: Response = syncFetch(authEndpoints.run(request))
+
+      "return a 200 (Ok) response" in {
+        assert(maybeResponse.status == Ok)
+      }
+    }
   }
 
   def syncFetch(r: Task[MaybeResponse]) = {

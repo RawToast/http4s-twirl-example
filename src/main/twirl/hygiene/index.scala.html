@@ -1,0 +1,39 @@
+@import hygiene.domain.Authority
+
+@(ratings: Seq[Authority])
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Hygiene Ratings</title>
+        <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="container">
+            <span class="col-md-6">
+
+                @if(ratings.isEmpty) {
+                    <div class="alert alert-danger" role="alert">No authorities found!</div>
+                } else {
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="authorityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Authorities
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="authorityDropdown">
+                        @for(authority <- ratings) {
+                            <li><a href=@{
+                                s"/authority/${authority.id}?authSize=${authority.establishments}"
+                            }>@{
+                                authority.name
+                            }</a></li>
+                        }
+                        </ul>
+                    </div>
+                }
+            </span>
+        </div>
+    </body>
+</html>

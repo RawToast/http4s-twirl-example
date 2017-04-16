@@ -9,35 +9,40 @@
     <body>
         <div class="container">
             <span class="col-md-6">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Rating</th>
-                        <th>Percentage</th>
-                    </tr>
-                    @tableRow(rating: String) = @{
-                        ratings.get(rating).map(f => {
-                                <tr>
-                                <td>{rating}</td>
-                                <td>{f.toString.take(4)}</td>
-                                </tr>
-                        })
-                    }
+                @tableRow(rating: String) = @{
+                    ratings.get(rating).map(f => {
+                            <tr>
+                            <td>{rating}</td>
+                            <td>{f.toString.take(4)}</td>
+                            </tr>
+                    })
+                }
 
-                    @for(score <- Seq("5-star", "4-star", "3-star", "2-star", "1-star", "0-star")) {
-                        @tableRow(score)
-                    }
+                @if(ratings.isEmpty) {
+                    <div class="alert alert-danger" role="alert">No establishments found!</div>
+                } else {
 
-                    @for(score <- Seq("Pass", "Improvement Required")) {
-                        @tableRow(score)
-                    }
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Rating</th>
+                            <th>Percentage</th>
+                        </tr>
+                        @for(score <- Seq("5-star", "4-star", "3-star", "2-star", "1-star", "0-star")) {
+                            @tableRow(score)
+                        }
 
-                    @tableRow("Exempt")
+                        @for(score <- Seq("Pass", "Improvement Required")) {
+                            @tableRow(score)
+                        }
 
-                    @for(remaining <- ratings.keySet.-("5-star", "4-star", "3-star", "2-star", "1-star", "0-star", "Pass", "Improvement Required", "Exempt")){
-                        @tableRow(remaining)
-                    }
+                        @tableRow("Exempt")
 
-                </table>
+                        @for(remaining <- ratings.keySet.-("5-star", "4-star", "3-star", "2-star", "1-star", "0-star", "Pass", "Improvement Required", "Exempt")) {
+                            @tableRow(remaining)
+                        }
+
+                    </table>
+                }
             </span>
         </div>
     </body>

@@ -390,4 +390,74 @@ object Responses {
   "links": []
 }"""
 
+
+  val multiAuthorityResponse =
+    json"""{
+  "authorities": [
+    {
+      "LocalAuthorityId": 197,
+      "LocalAuthorityIdCode": "760",
+      "Name": "Aberdeen City",
+      "EstablishmentCount": 1761,
+      "SchemeType": 2,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://api.ratings.food.gov.uk/authorities/197"
+        }
+      ]
+    },
+    {
+      "LocalAuthorityId": 198,
+      "LocalAuthorityIdCode": "761",
+      "Name": "Aberdeenshire",
+      "EstablishmentCount": 1794,
+      "SchemeType": 2,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://api.ratings.food.gov.uk/authorities/198"
+        }
+      ]
+    },
+    {
+      "LocalAuthorityId": 277,
+      "LocalAuthorityIdCode": "323",
+      "Name": "Adur",
+      "EstablishmentCount": 407,
+      "SchemeType": 1,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://api.ratings.food.gov.uk/authorities/277"
+        }
+      ]
+    },
+    {
+      "LocalAuthorityId": 158,
+      "LocalAuthorityIdCode": "055",
+      "Name": "Allerdale",
+      "EstablishmentCount": 1068,
+      "SchemeType": 1,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://api.ratings.food.gov.uk/authorities/158"
+        }
+      ]
+    },
+    {
+      "LocalAuthorityId": 48,
+      "LocalAuthorityIdCode": "062",
+      "Name": "Amber Valley",
+      "EstablishmentCount": 967,
+      "SchemeType": 1,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://api.ratings.food.gov.uk/authorities/48"
+        }
+      ]
+    }]}"""
+
 }
