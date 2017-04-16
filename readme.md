@@ -1,5 +1,6 @@
 # Food Hygiene
 
+[![CircleCI](https://circleci.com/gh/RawToast/http4s-twirl-example/tree/master.svg?style=svg&circle-token=90076579eefc7b29b7725fcc0b75ca9445f8aa82)](https://circleci.com/gh/RawToast/http4s-twirl-example/tree/master)
 
 ## Running this app
 
