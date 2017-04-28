@@ -1,9 +1,8 @@
-package hygiene.service
+package hygiene.services.util
 
-import hygiene.domain.Authority
-import hygiene.services.JsonAuthorityParser
-import org.scalatest.WordSpec
 import hygiene.Responses.multiAuthorityResponse
+import hygiene.domain.Authority
+import org.scalatest.WordSpec
 
 class AuthorityParserSpec extends WordSpec {
   import io.circe.literal._

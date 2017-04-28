@@ -1,4 +1,4 @@
-package hygiene.services
+package hygiene.services.util
 
 import io.circe.Json
 
@@ -20,10 +20,9 @@ object JsonEstablishmentParser extends EstablishmentParser[Json] {
 
     val scores: Seq[String] = root.establishments.each.RatingValue.string.getAll(validEstablishments)
 
-    scores
-      .foldLeft(Map.empty[String, Int])((s: Map[String, Int], i: String) =>
-      s |+| Map(i -> 1)
-    )
+    // Fold and combine with an empty map to build totals for each score
+    scores.foldLeft(Map.empty[String, Int])((scoreMap, score) =>
+      scoreMap |+| Map(score -> 1))
   }
 }
 

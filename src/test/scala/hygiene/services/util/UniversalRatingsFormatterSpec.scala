@@ -1,13 +1,12 @@
-package hygiene.service
+package hygiene.services.util
 
-import hygiene.services.RatingsFormatter
 import org.scalatest.WordSpec
 
 
-class RatingsFormatterSpec extends WordSpec {
+class UniversalRatingsFormatterSpec extends WordSpec {
 
   "RatingsFormatter" when {
-    val ratingsFormatter = RatingsFormatter
+    val ratingsFormatter = UniversalRatingsFormatter
 
     "Calculating the average ratings" should {
 

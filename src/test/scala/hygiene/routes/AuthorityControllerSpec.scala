@@ -4,6 +4,7 @@ import fs2.Task
 import hygiene.Responses.{multiAuthorityResponse, scottishEstablishmentsJson, validEstablishmentsJson}
 import hygiene.client.JsonClient
 import hygiene.services._
+import hygiene.services.util.{JsonAuthorityParser, JsonEstablishmentParser, UniversalRatingsFormatter}
 import io.circe.literal._
 import org.http4s.dsl._
 import org.http4s.{MaybeResponse, Request, Response, Uri, _}
@@ -17,8 +18,8 @@ class AuthorityControllerSpec extends WordSpec with MockitoSugar {
 
     val mockClient = mock[JsonClient]
 
-    def authorityService = new AuthorityService(mockClient, JsonAuthorityParser, cacheTimeInSeconds = 0L)
-    val establishmentService = new EstablishmentService(mockClient, JsonEstablishmentParser, RatingsFormatter, cacheTimeInSeconds = 0L)
+    def authorityService = new AuthorityService(mockClient, JsonAuthorityParser)
+    val establishmentService = new EstablishmentService(mockClient, JsonEstablishmentParser, UniversalRatingsFormatter)
     val authorityController = new AuthorityController(establishmentService, authorityService)
 
 

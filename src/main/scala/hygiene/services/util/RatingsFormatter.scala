@@ -1,10 +1,14 @@
-package hygiene.services
+package hygiene.services.util
 
-trait Formatter {
+trait RatingsFormatter {
   def summariseRatings(ratings: Map[String, Int]): Map[String, Double]
 }
 
-object RatingsFormatter extends Formatter {
+
+object UniversalRatingsFormatter extends RatingsFormatter {
+  /**
+    * Note that this implementation of Formatter can handle scottish or star based ratings
+    */
   def summariseRatings(ratings: Map[String, Int]): Map[String, Double] = {
     import cats.implicits._
 
@@ -12,9 +16,12 @@ object RatingsFormatter extends Formatter {
     else if (ratings.keySet == Set(exempt)) toPercent(ratings)
     else if (ratings.keySet.exists(key => scottishRatings.contains(key))) scottishSummary |+| toPercent(ratings)
     else {
+      // Calculate percentage and add `-star` prefix if required.
       val mySum = toPercent(ratings)
-        .map(kv => if (kv._1.length == 1) (s"${kv._1}-star", kv._2) else kv)
+        .map{ case (key: String, value: Double) =>
+          if (key.length == 1) (s"$key-star", value) else key -> value}
 
+      // Combination ensures we include any missing rating categories
       summary |+| mySum
     }
   }

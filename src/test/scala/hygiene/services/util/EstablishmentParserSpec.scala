@@ -1,7 +1,6 @@
-package hygiene.service
+package hygiene.services.util
 
 import hygiene.Responses.{scottishEstablishmentsJson, validEstablishmentsJson}
-import hygiene.services.JsonEstablishmentParser
 import org.scalatest.WordSpec
 
 class EstablishmentParserSpec extends WordSpec {

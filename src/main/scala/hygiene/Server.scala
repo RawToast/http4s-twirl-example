@@ -3,8 +3,10 @@ package hygiene
 import java.util.concurrent.Executors
 
 import hygiene.client.JsonClient
+import hygiene.middleware.CachingMiddleware
 import hygiene.routes.AuthorityController
-import hygiene.services._
+import hygiene.services.{AuthorityService, EstablishmentService}
+import hygiene.services.util.{JsonAuthorityParser, JsonEstablishmentParser, UniversalRatingsFormatter}
 import org.http4s.Uri
 import org.http4s.client.blaze.PooledHttp1Client
 import org.http4s.server.blaze.BlazeBuilder
@@ -18,7 +20,7 @@ object Server extends StreamApp {
   val client = new JsonClient(PooledHttp1Client(), hygieneApiUri)
 
   val authorityService = new AuthorityService(client, JsonAuthorityParser)
-  val establishmentService = new EstablishmentService(client, JsonEstablishmentParser, RatingsFormatter)
+  val establishmentService = new EstablishmentService(client, JsonEstablishmentParser, UniversalRatingsFormatter)
 
   val authController = new AuthorityController(establishmentService, authorityService)
 
@@ -26,7 +28,7 @@ object Server extends StreamApp {
     // Unconfigured, will bind to 8080
     BlazeBuilder.bindHttp()
       .withServiceExecutor(Executors.newCachedThreadPool())
-      .mountService(authController.endpoints, "/")
+      .mountService(CachingMiddleware.cacheRoot(authController.endpoints), "/")
       .serve
   }
 }
