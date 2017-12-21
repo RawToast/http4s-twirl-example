@@ -1,7 +1,5 @@
 package hygiene
 
-import java.util.concurrent.Executors
-
 import hygiene.client.JsonClient
 import hygiene.middleware.CachingMiddleware
 import hygiene.routes.AuthorityController
@@ -24,10 +22,10 @@ object Server extends StreamApp {
 
   val authController = new AuthorityController(establishmentService, authorityService)
 
-  override def main(args: List[String]) = {
+  override def stream(args: List[String]) = {
     // Unconfigured, will bind to 8080
     BlazeBuilder.bindHttp()
-      .withServiceExecutor(Executors.newCachedThreadPool())
+      .withExecutionContext(scala.concurrent.ExecutionContext.global)
       .mountService(CachingMiddleware.cacheRoot(authController.endpoints), "/")
       .serve
   }

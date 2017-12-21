@@ -3,6 +3,7 @@ package hygiene.client
 import com.github.tomakehurst.wiremock._
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMock._
+
 import fs2.Task
 import io.circe.Json
 import org.http4s.client.blaze.PooledHttp1Client
