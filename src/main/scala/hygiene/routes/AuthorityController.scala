@@ -12,7 +12,6 @@ class AuthorityController(establishmentService: HygieneRatings, authorityService
   val endpoints: HttpService = HttpService {
 
     case GET -> Root => {
-
       authorityService
         .authorities
         .map(toIndexHtml)

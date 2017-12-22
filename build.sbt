@@ -3,10 +3,10 @@ name := "food-hygiene"
 
 version := "1.0"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.4"
 
-val http4sVersion = "0.17.0-M1"
-val circeVersion = "0.7.1"
+val http4sVersion = "0.17.6"
+val circeVersion = "0.8.0"
 
 libraryDependencies ++= Seq(
   "org.http4s" %% "http4s-dsl" % http4sVersion,
@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   // Test
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "org.mockito" % "mockito-core" % "2.7.21" % "test",
-  "com.github.tomakehurst" % "wiremock" % "2.6.0" % "test"
+  "com.github.tomakehurst" % "wiremock" % "2.12.0" % "test"
 )
 
 // Packaging
