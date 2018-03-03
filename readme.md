@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/RawToast/http4s-twirl-example/tree/master.svg?style=svg&circle-token=90076579eefc7b29b7725fcc0b75ca9445f8aa82)](https://circleci.com/gh/RawToast/http4s-twirl-example/tree/master)
 
-This application is an example of combining Http4s with Twirl templates, including example unit and template tests.
+This application is an example of using Http4s, Blaze Client, Circe and Twirl templates -- including example unit and template tests.
 
 
 ## Running this app
