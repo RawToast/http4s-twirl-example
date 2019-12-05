@@ -3,7 +3,7 @@ name := "food-hygiene"
 
 version := "1.0"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.10"
 
 val http4sVersion = "0.17.6"
 val circeVersion = "0.8.0"
