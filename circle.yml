@@ -1,8 +1,0 @@
-dependencies:
-  cache_directories:
-    - "~/.ivy2"
-    - "~/.sbt"
-
-test:
-  override:
-    - sbt clean validate
