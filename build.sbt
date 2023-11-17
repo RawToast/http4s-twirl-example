@@ -60,5 +60,6 @@ val additionalOptions = Seq(
   "-Ywarn-value-discard"
 )
 
-scalacOptions in(Compile, doc) ++= compilerOptions ++ additionalOptions
-scalacOptions in Test ++= compilerOptions
+Compile / doc / scalacOptions ++= compilerOptions ++ additionalOptions
+
+Test / scalacOptions  ++= compilerOptions
