@@ -24,7 +24,7 @@ object AuthorityController:
   def apply[F[_]](using ev: Routes[F]): Routes[F] = ev
 
   def impl[F[_]: Monad](
-    // ev: HygieneRatings[F],
+    ev: HygieneRatings[F],
     authorityService: AuthorityService[F]
   ): Routes[F] = new Routes[F]:
     val dsl = new Http4sDsl[F] {}
