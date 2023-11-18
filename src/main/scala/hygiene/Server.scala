@@ -10,6 +10,8 @@ package hygiene
 // import org.http4s.server.blaze.BlazeBuilder
 // import org.http4s.util.StreamApp
 
+object Server
+
 // object Server extends StreamApp {
 
 //   // Construct services / inject here

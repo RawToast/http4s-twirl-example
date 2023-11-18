@@ -6,7 +6,7 @@ package hygiene.middleware
 // import org.log4s._
 // import org.http4s.dsl._
 
-// object CachingMiddleware {
+object CachingMiddleware
 
 //   lazy val logger = getLogger
 

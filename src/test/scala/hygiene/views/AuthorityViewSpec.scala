@@ -5,6 +5,8 @@ package hygiene.views
 
 // class AuthorityViewSpec extends WordSpec with MockitoSugar {
 
+object AuthorityViewSpec
+
 //   "AuthorityView" when {
 //     "rendering with no establishments" must {
 

@@ -12,6 +12,7 @@ package hygiene.routes
 // import org.scalatest.WordSpec
 // import org.scalatest.mockito.MockitoSugar
 
+object AuthorityControllerSpec
 // class AuthorityControllerSpec extends WordSpec with MockitoSugar {
 
 //   "AuthorityController" when {

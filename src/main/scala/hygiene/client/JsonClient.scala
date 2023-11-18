@@ -9,6 +9,9 @@ package hygiene.client
 // import org.http4s.dsl._
 // import org.log4s._
 
+trait Client[F[_], R]:
+  def fetch(path: String): F[R]
+
 // class JsonClient(client: Client, baseUri:Uri){
 
 //   lazy val logger: Logger = getLogger

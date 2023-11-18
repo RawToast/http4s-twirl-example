@@ -1,8 +1,7 @@
 package hygiene.services.util
 
-// trait RatingsFormatter {
-//   def summariseRatings(ratings: Map[String, Int]): Map[String, Double]
-// }
+trait RatingsFormatter:
+  def summariseRatings(ratings: Map[String, Int]): Map[String, Double]
 
 // object UniversalRatingsFormatter extends RatingsFormatter {
 //   /**

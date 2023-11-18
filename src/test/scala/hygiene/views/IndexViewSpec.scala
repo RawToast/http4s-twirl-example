@@ -4,6 +4,8 @@ package hygiene.views
 // import org.scalatest.WordSpec
 // import org.scalatest.mockito.MockitoSugar
 
+object IndexViewSpec
+
 // class IndexViewSpec extends WordSpec with MockitoSugar {
 
 //   "AuthorityView" when {

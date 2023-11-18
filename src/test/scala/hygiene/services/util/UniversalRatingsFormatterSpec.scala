@@ -2,6 +2,7 @@ package hygiene.services.util
 
 // import org.scalatest.WordSpec
 
+object UniversalRatingsFormatterSpec
 // class UniversalRatingsFormatterSpec extends WordSpec {
 
 //   "RatingsFormatter" when {

@@ -6,9 +6,8 @@ package hygiene.services
 // import io.circe.Json
 // import org.log4s.{Logger, getLogger}
 
-// trait HygieneRatings {
-//   def hygieneRatings(id: Int, establishments: Int): Task[Map[String, Double]]
-// }
+trait HygieneRatings[F[_]]:
+  def hygieneRatings(id: Int, establishments: Int): F[Map[String, Double]]
 
 // class EstablishmentService(client: JsonClient,
 //                            establishmentParser: EstablishmentParser[Json],

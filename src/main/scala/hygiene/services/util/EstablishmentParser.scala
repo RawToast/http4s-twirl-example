@@ -2,11 +2,10 @@ package hygiene.services.util
 
 // import io.circe.Json
 
-// trait EstablishmentParser[T] {
-//   def establishmentRating(singleEstablishment: T): Option[String]
+trait EstablishmentParser[T]:
+  def establishmentRating(singleEstablishment: T): Option[String]
 
-//   def countEstablishmentRatings(validEstablishmentsJson: T): Map[String, Int]
-// }
+  def countEstablishmentRatings(validEstablishmentsJson: T): Map[String, Int]
 
 // object JsonEstablishmentParser extends EstablishmentParser[Json] {
 

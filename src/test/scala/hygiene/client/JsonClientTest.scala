@@ -9,6 +9,7 @@ package hygiene.client
 // import org.http4s.{DecodeFailure, MalformedMessageBodyFailure, Uri}
 // import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, WordSpec}
 
+object JsonClientTest
 // class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfterAll {
 
 //   val testport = 9995

@@ -1,6 +1,6 @@
 package hygiene.services.util
 
-// import hygiene.domain.Authority
+import hygiene.domain.Authority
 // import io.circe.Json
 // import io.circe.optics.JsonPath._
 // import monocle.{Optional, Traversal}
@@ -28,6 +28,6 @@ package hygiene.services.util
 //   }
 // }
 
-// trait AuthorityParser[T] {
-//   def summariseAuthorites(authData: T): Seq[Authority]
-// }
+trait AuthorityParser[T] {
+  def summariseAuthorites(authData: T): Seq[Authority]
+}

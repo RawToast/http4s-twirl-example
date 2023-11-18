@@ -8,6 +8,7 @@ package hygiene.services
 // import org.scalatest.mockito.MockitoSugar
 // import org.scalatest.{Matchers, WordSpec}
 
+object EstablishmentServiceSpec
 // class EstablishmentServiceSpec extends WordSpec with MockitoSugar with Matchers {
 
 //   "EstablishmentService" must {

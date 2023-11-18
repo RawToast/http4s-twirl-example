@@ -8,6 +8,8 @@ package hygiene.routes
 // import play.twirl.api.Html
 // import org.http4s.twirl._
 
+object HereToShutupTheCompiler
+
 // class AuthorityController(establishmentService: HygieneRatings, authorityService: ListAuthorities) {
 //   val endpoints: HttpService = HttpService {
 

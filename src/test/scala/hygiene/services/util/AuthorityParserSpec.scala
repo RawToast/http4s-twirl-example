@@ -4,6 +4,7 @@ package hygiene.services.util
 // import hygiene.domain.Authority
 // import org.scalatest.WordSpec
 
+object AuthorityParserSpec
 // class AuthorityParserSpec extends WordSpec {
 //   import io.circe.literal._
 

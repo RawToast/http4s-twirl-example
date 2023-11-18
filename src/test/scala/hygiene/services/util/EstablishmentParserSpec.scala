@@ -3,6 +3,7 @@ package hygiene.services.util
 // import hygiene.Responses.{scottishEstablishmentsJson, validEstablishmentsJson}
 // import org.scalatest.WordSpec
 
+object EstablishmentParserSpec
 // class EstablishmentParserSpec extends WordSpec {
 
 //   "EstablishmentParser" when {
