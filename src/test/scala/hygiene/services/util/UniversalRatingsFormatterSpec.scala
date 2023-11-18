@@ -1,4 +1,4 @@
-// package hygiene.services.util
+package hygiene.services.util
 
 // import org.scalatest.WordSpec
 

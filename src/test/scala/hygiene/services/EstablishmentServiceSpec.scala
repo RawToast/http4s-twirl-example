@@ -1,4 +1,4 @@
-// package hygiene.services
+package hygiene.services
 
 // import fs2.Task
 // import hygiene.Responses._
@@ -15,7 +15,6 @@
 //     val parser = JsonEstablishmentParser
 //     val formatter = UniversalRatingsFormatter
 
-
 //     "Calculate and format ratings" in {
 //       val mockClient = mock[JsonClient]
 //       val service = new EstablishmentService(mockClient, parser, formatter)
@@ -24,7 +23,6 @@
 //         .thenReturn(Task.delay(validEstablishmentsJson))
 
 //       val result = service.hygieneRatings(111, 222).unsafeRun()
-
 
 //       assert(result.nonEmpty)
 //       assert(result.get("5-star").isDefined)

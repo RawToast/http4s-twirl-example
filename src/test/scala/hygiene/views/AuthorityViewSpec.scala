@@ -1,8 +1,7 @@
-// package hygiene.views
+package hygiene.views
 
 // import org.scalatest.WordSpec
 // import org.scalatest.mockito.MockitoSugar
-
 
 // class AuthorityViewSpec extends WordSpec with MockitoSugar {
 
@@ -16,7 +15,6 @@
 //       }
 
 //       val page = renderedHtml.body
-
 
 //       "state no establishments were found" in {
 //         assert(page.contains("No establishments found"))
@@ -42,7 +40,6 @@
 
 //       val renderedHtml = hygiene.html.authority(ratings)
 //       val page = renderedHtml.body
-
 
 //       "return html content type" in {
 //         assert(renderedHtml.contentType == "text/html")
@@ -76,7 +73,6 @@
 
 //       val renderedHtml = hygiene.html.authority(ratings)
 //       val page = renderedHtml.body
-
 
 //       "return html content type" in {
 //         assert(renderedHtml.contentType == "text/html")

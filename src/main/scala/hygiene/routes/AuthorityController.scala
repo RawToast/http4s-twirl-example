@@ -1,4 +1,4 @@
-// package hygiene.routes
+package hygiene.routes
 
 // import hygiene.domain.Authority
 // import hygiene.services._

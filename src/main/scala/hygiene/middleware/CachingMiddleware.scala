@@ -1,4 +1,4 @@
-// package hygiene.middleware
+package hygiene.middleware
 
 // import fs2.Task
 // import org.http4s.Method.GET

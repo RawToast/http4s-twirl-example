@@ -1,4 +1,4 @@
-// package hygiene
+package hygiene
 
 // import io.circe.Json
 // import io.circe.literal._
@@ -389,7 +389,6 @@
 //   },
 //   "links": []
 // }"""
-
 
 //   val multiAuthorityResponse =
 //     json"""{

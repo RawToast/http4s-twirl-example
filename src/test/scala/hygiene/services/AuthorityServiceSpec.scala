@@ -1,4 +1,4 @@
-// package hygiene.services
+package hygiene.services
 
 // import fs2.Task
 // import hygiene.Responses.multiAuthorityResponse
@@ -26,7 +26,6 @@
 //       assert(result.nonEmpty)
 //       assert(result.head.name == "Aberdeen City")
 //     }
-
 
 //     "Handle Json that does not conform to the expected format" in {
 //       import io.circe.literal._
@@ -62,7 +61,6 @@
 //       }
 //     }
 //   }
-
 
 //   val partiallyValidResponse =
 //     json"""{

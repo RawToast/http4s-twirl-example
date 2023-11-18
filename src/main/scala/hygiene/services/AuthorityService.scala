@@ -1,4 +1,4 @@
-// package hygiene.services
+package hygiene.services
 
 // import fs2.Task
 // import hygiene.client.JsonClient

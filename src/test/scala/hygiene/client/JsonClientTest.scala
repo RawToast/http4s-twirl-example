@@ -1,4 +1,4 @@
-// package hygiene.client
+package hygiene.client
 
 // import com.github.tomakehurst.wiremock._
 // import com.github.tomakehurst.wiremock.client.WireMock
@@ -8,7 +8,6 @@
 // import org.http4s.client.blaze.PooledHttp1Client
 // import org.http4s.{DecodeFailure, MalformedMessageBodyFailure, Uri}
 // import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, WordSpec}
-
 
 // class JsonClientTest extends WordSpec with BeforeAndAfterEach with BeforeAndAfterAll {
 

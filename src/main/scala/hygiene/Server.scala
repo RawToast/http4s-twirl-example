@@ -1,4 +1,4 @@
-// package hygiene
+package hygiene
 
 // import hygiene.client.JsonClient
 // import hygiene.middleware.CachingMiddleware
@@ -9,7 +9,6 @@
 // import org.http4s.client.blaze.PooledHttp1Client
 // import org.http4s.server.blaze.BlazeBuilder
 // import org.http4s.util.StreamApp
-
 
 // object Server extends StreamApp {
 

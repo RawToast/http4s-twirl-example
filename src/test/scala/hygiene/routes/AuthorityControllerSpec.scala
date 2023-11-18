@@ -1,4 +1,4 @@
-// package hygiene.routes
+package hygiene.routes
 
 // import fs2.Task
 // import hygiene.Responses.{multiAuthorityResponse, scottishEstablishmentsJson, validEstablishmentsJson}
@@ -22,7 +22,6 @@
 //     val establishmentService = new EstablishmentService(mockClient, JsonEstablishmentParser, UniversalRatingsFormatter)
 //     val authorityController = new AuthorityController(establishmentService, authorityService)
 
-
 //     val authEndpoints = authorityController.endpoints
 //     val request = Request(GET, Uri.uri("/authority/1"))
 
@@ -31,7 +30,6 @@
 //         .thenReturn(Task.now(json"""{}"""))
 
 //       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
-
 
 //       "return a 200 (Ok) response" in {
 //         assert(maybeResponse.status == Ok)
@@ -65,9 +63,7 @@
 //       when(mockClient.fetch("/Establishments?localAuthorityId=1&pageSize=100"))
 //         .thenReturn(Task.delay(validEstablishmentsJson))
 
-
 //       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
-
 
 //       "return a 200 (Ok) response" in {
 //         assert(maybeResponse.status == Ok)
@@ -99,9 +95,7 @@
 //       when(mockClient.fetch("/Establishments?localAuthorityId=1&pageSize=100"))
 //         .thenReturn(Task.delay(scottishEstablishmentsJson))
 
-
 //       val maybeResponse: Response = syncFetch(authEndpoints.run(request))
-
 
 //       "return a 200 (Ok) response" in {
 //         assert(maybeResponse.status == Ok)
@@ -132,7 +126,6 @@
 //         assert(!page.contains("-star</td>"))
 //       }
 //     }
-
 
 //     "fetching the index page" must {
 //       when(mockClient.fetch("/authorities/basic"))

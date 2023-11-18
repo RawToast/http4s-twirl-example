@@ -1,9 +1,8 @@
-// package hygiene.views
+package hygiene.views
 
 // import hygiene.domain.Authority
 // import org.scalatest.WordSpec
 // import org.scalatest.mockito.MockitoSugar
-
 
 // class IndexViewSpec extends WordSpec with MockitoSugar {
 
@@ -18,7 +17,6 @@
 //       }
 
 //       val page = renderedHtml.body
-
 
 //       "state no authorities were found" in {
 //         assert(page.contains("No authorities found"))
@@ -38,7 +36,6 @@
 //       }
 
 //       val page = renderedHtml.body
-
 
 //       "include a dropdown breakdown for authorities" in {
 //         assert(page.contains("""<div class="dropdown">"""))

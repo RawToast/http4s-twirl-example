@@ -1,4 +1,4 @@
-// package hygiene.client
+package hygiene.client
 
 // import fs2.Task
 // import io.circe.Json
@@ -8,7 +8,6 @@
 // import org.http4s.client.Client
 // import org.http4s.dsl._
 // import org.log4s._
-
 
 // class JsonClient(client: Client, baseUri:Uri){
 
