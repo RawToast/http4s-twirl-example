@@ -25,7 +25,6 @@ lazy val root = project
       "org.http4s" %% "http4s-ember-client" % Http4sVersion,
       "org.http4s" %% "http4s-circe"        % Http4sVersion,
       "org.http4s" %% "http4s-dsl"          % Http4sVersion,
-      // "org.http4s" %% "http4s-twirl"          % Http4sVersion,
 
       // Circe (Json)
       "io.circe" %% "circe-core"    % CirceVersion,

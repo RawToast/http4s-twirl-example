@@ -1,5 +1,12 @@
 package hygiene
 
+import hygiene.routes.AuthorityController
+import hygiene.services.AuthorityService
+
+import cats.effect._
+import com.comcast.ip4s._
+import org.http4s.ember.server._
+
 // import hygiene.client.JsonClient
 // import hygiene.middleware.CachingMiddleware
 // import hygiene.routes.AuthorityController
@@ -10,7 +17,19 @@ package hygiene
 // import org.http4s.server.blaze.BlazeBuilder
 // import org.http4s.util.StreamApp
 
-object Server
+object Server extends IOApp:
+
+  val authorityService: AuthorityService[IO] = AuthorityService.stub()
+  val authorityController                    = AuthorityController.impl[IO](authorityService)
+  def run(args: List[String])                =
+    EmberServerBuilder
+      .default[IO]
+      .withHost(ipv4"0.0.0.0")
+      .withPort(port"8080")
+      .withHttpApp(authorityController.routes.orNotFound)
+      .build
+      .use(_ => IO.never)
+      .as(ExitCode.Success)
 
 // object Server extends StreamApp {
 
