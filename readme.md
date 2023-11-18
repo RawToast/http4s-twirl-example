@@ -26,3 +26,5 @@ This api is built on the following Scala / Java open source libraries:
 * [ScalaTest](http://www.scalatest.org)
 * [Mockito](http://site.mockito.org)
 * [WireMock](http://wiremock.org)
+
+# http://api.ratings.food.gov.uk/Help/Index
