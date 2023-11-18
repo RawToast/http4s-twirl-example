@@ -1,8 +1,8 @@
 package hygiene.routes
 
-import hygiene.domain.Authority
+import hygiene.domain._
 import hygiene.services.AuthorityService
-import hygiene.services.HygieneRatings
+import hygiene.services.EstablishmentService
 
 import cats.Monad
 import cats.effect._
@@ -24,45 +24,27 @@ object AuthorityController:
   def apply[F[_]](using ev: Routes[F]): Routes[F] = ev
 
   def impl[F[_]: Monad](
-    ev: HygieneRatings[F],
-    authorityService: AuthorityService[F]
+    authorityService: AuthorityService[F],
+    establishmentService: EstablishmentService[F]
   ): Routes[F] = new Routes[F]:
     val dsl = new Http4sDsl[F] {}
     import dsl._
 
+    object AuthoritySizeMatcher extends OptionalQueryParamDecoderMatcher[Int]("authSize")
+
     val routes = HttpRoutes.of[F] {
       case GET -> Root =>
-        authorityService.authorities
-          .map(_.asJson)
-          .flatMap(Ok(_))
+        for {
+          authorities <- authorityService.authorities
+          json         = authorities.asJson
+          response    <- Ok(json)
+        } yield response
 
-      // case GET -> Root / "authority" / IntVar(id) :? AuthoritySizeMatcher(authSize) =>
-      //   // Whilst this works, it may be better to run multiple parallel searches and a page size
-      //   ev.hygieneRatings(id, authSize.getOrElse(100))
-      //     // .map(_.toJson)
-      //     .flatMap(Ok(_))
+      case GET -> Root / "authority" / IntVar(id) :? AuthoritySizeMatcher(authSize) =>
+        // Whilst this works, it may be better to run multiple parallel searches and a page size
+        for {
+          establishments <- establishmentService.hygieneRatings(id, authSize.getOrElse(100))
+          json            = establishments.asJson
+          response       <- Ok(json)
+        } yield response
     }
-// class AuthorityController(establishmentService: HygieneRatings, authorityService: ListAuthorities) {
-//   val endpoints: HttpService = HttpService {
-
-//     case GET -> Root => {
-//       authorityService
-//         .authorities
-//         .map(toIndexHtml)
-//         .flatMap(Ok(_))
-//     }
-
-//     case GET -> Root / "authority" / IntVar(id) :? AuthoritySizeMatcher(authSize) =>
-//       // Whilst this works, it may be better to run multiple parallel searches and a page size
-//       establishmentService.hygieneRatings(id, authSize.getOrElse(100))
-//         .map(toHtml)
-//         .flatMap(Ok(_))
-//   }
-
-//   private def toHtml(kv: Map[String, Double]): Html = hygiene.html.authority(kv)
-
-//   private def toIndexHtml(kv: Seq[Authority]): Html = hygiene.html.index(kv)
-
-//   object AuthoritySizeMatcher extends OptionalQueryParamDecoderMatcher[Int]("authSize")
-
-// }

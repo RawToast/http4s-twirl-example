@@ -31,3 +31,6 @@ object RatingSummary:
   given Codec[RatingSummary] = deriveCodec
 
 case class AuthoritySummary(name: String, ratings: RatingSummary)
+
+object AuthoritySummary:
+  given Codec[AuthoritySummary] = deriveCodec

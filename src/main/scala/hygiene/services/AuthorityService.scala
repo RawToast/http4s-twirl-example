@@ -1,13 +1,8 @@
 package hygiene.services
 
-// import fs2.Task
-// import hygiene.client.JsonClient
 import hygiene.domain.Authority
 
 import cats.effect.IO
-// import hygiene.services.util.AuthorityParser
-// import io.circe.Json
-// import org.log4s.{Logger, getLogger}
 
 trait AuthorityService[F[_]]:
   def authorities: F[Seq[Authority]]

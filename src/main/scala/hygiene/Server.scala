@@ -1,27 +1,19 @@
 package hygiene
 
+import hygiene.domain.EstablishmentRatings
 import hygiene.routes.AuthorityController
-import hygiene.services.AuthorityService
+import hygiene.services.{AuthorityService, EstablishmentService}
 
 import cats.effect._
 import com.comcast.ip4s._
 import org.http4s.ember.server._
 
-// import hygiene.client.JsonClient
-// import hygiene.middleware.CachingMiddleware
-// import hygiene.routes.AuthorityController
-// import hygiene.services.{AuthorityService, EstablishmentService}
-// import hygiene.services.util.{JsonAuthorityParser, JsonEstablishmentParser, UniversalRatingsFormatter}
-// import org.http4s.Uri
-// import org.http4s.client.blaze.PooledHttp1Client
-// import org.http4s.server.blaze.BlazeBuilder
-// import org.http4s.util.StreamApp
-
 object Server extends IOApp:
 
-  val authorityService: AuthorityService[IO] = AuthorityService.stub()
-  val authorityController                    = AuthorityController.impl[IO](authorityService)
-  def run(args: List[String])                =
+  val authorityService: AuthorityService[IO]         = AuthorityService.stub()
+  val establishmentService: EstablishmentService[IO] = EstablishmentService.stub()
+  val authorityController                            = AuthorityController.impl[IO](authorityService, establishmentService)
+  def run(args: List[String])                        =
     EmberServerBuilder
       .default[IO]
       .withHost(ipv4"0.0.0.0")
